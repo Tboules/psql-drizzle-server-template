@@ -1,0 +1,92 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "id": "c0d15e90-ada7-4f8c-bf24-0ee30b510414",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "table": {
+      "name": "table",
+      "schema": "",
+      "columns": {
+        "mood": {
+          "name": "mood",
+          "type": "mood",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {}
+    },
+    "todo": {
+      "name": "todo",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "body": {
+          "name": "body",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "todo_status": {
+          "name": "todo_status",
+          "type": "todo_status",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {}
+    }
+  },
+  "enums": {
+    "mood": {
+      "name": "mood",
+      "values": {
+        "sad": "sad",
+        "ok": "ok",
+        "happy": "happy"
+      }
+    },
+    "todo_status": {
+      "name": "todo_status",
+      "values": {
+        "created": "created",
+        "in-progress": "in-progress",
+        "complete": "complete"
+      }
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
