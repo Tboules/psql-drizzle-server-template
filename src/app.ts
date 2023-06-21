@@ -8,6 +8,8 @@ const port = 3000;
 
 appLoader(app);
 
+console.log("known hosts");
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
