@@ -1,3 +1,4 @@
+import { errorHandler } from "./../api/middleware/errorHandler.js";
 import cors from "cors";
 import helmet from "helmet";
 import apiRouter from "../api/routes/index.js";
@@ -9,5 +10,6 @@ export default (app) => {
     app.disable("x-powered-by");
     app.use(bodyParser.json());
     app.use("/api", apiRouter);
+    app.use(errorHandler);
 };
 //# sourceMappingURL=expressLoader.js.map

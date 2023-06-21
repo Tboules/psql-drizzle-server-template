@@ -4,6 +4,7 @@ import tryCatch from "../../../../utils/tryCatch.js";
 import bcrypt from "bcrypt";
 import { db } from "../../../../loaders/drizzleLoader.js";
 import { eq } from "drizzle-orm";
+import jwt from "jsonwebtoken";
 
 const SALT_ROUNDS = 10;
 
@@ -30,9 +31,12 @@ export const registerUser: RequestHandler = tryCatch(async (req, res) => {
 
   const registeredUser = await db.insert(user).values(newUser).returning();
 
-  //send back JWT token
+  const token = jwt.sign(
+    registeredUser[0],
+    process.env.ACCESS_TOKEN_SECRET ?? ""
+  );
 
-  res.status(200).send(registeredUser);
+  res.status(200).send({ token });
 
   return;
 });
