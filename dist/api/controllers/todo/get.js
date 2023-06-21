@@ -4,6 +4,7 @@ import { todo } from "../../../db/schema/todo.js";
 import tryCatch from "../../../utils/tryCatch.js";
 export const getTodos = tryCatch(async (req, res) => {
     const todos = await db.select().from(todo);
+    req.user;
     res.status(200).send(todos);
 });
 export const searchTodos = tryCatch(async (req, res) => {

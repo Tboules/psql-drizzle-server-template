@@ -1,12 +1,15 @@
 import { ilike, or } from "drizzle-orm";
 import { RequestHandler } from "express";
 
-import { db } from "../../../loaders/drizzleLoader.js";
 import { todo } from "../../../db/schema/todo.js";
+import { db } from "../../../loaders/drizzleLoader.js";
 import tryCatch from "../../../utils/tryCatch.js";
+import { RequestWithUser } from "../../../utils/types.js";
 
-export const getTodos: RequestHandler = tryCatch(async (req, res) => {
+export const getTodos = tryCatch(async (req: RequestWithUser, res) => {
   const todos = await db.select().from(todo);
+
+  console.log(req.user);
 
   res.status(200).send(todos);
 });

@@ -31,10 +31,7 @@ export const registerUser: RequestHandler = tryCatch(async (req, res) => {
 
   const registeredUser = await db.insert(user).values(newUser).returning();
 
-  const token = jwt.sign(
-    registeredUser[0],
-    process.env.ACCESS_TOKEN_SECRET ?? ""
-  );
+  const token = jwt.sign(registeredUser[0], process.env.ACCESS_TOKEN_SECRET!);
 
   res.status(200).send({ token });
 
