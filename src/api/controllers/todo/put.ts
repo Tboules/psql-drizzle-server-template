@@ -1,25 +1,35 @@
 import { todo, todoInsertSchema, Todo } from "../../../db/schema/todo.js";
 import { RequestHandler } from "express";
 import { db } from "../../../loaders/drizzleLoader.js";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import tryCatch from "../../../utils/tryCatch.js";
+import { RequestWithUser } from "../../../utils/types.js";
 
-export const putTodo: RequestHandler = tryCatch(async (req, res) => {
-  const data = req.body;
+export const putTodo: RequestHandler = tryCatch(
+  async (req: RequestWithUser, res) => {
+    const todoToUpdate = req.body as Todo;
+    const userId = req.user?.id ?? "";
 
-  const newTodo: Todo = {
-    ...data,
-    createdAt: new Date(data.createdAt),
-    updatedAt: new Date(Date.now()),
-  };
+    console.log(userId, todoToUpdate.authorId);
 
-  todoInsertSchema.parse(newTodo);
+    if (todoToUpdate.authorId != userId) {
+      throw new Error("That todo does not belong to you");
+    }
 
-  const updatedTodo = await db
-    .update(todo)
-    .set(newTodo)
-    .where(eq(todo.id, data.id))
-    .returning();
+    const newTodo: Todo = {
+      ...todoToUpdate,
+      createdAt: new Date(todoToUpdate.createdAt),
+      updatedAt: new Date(Date.now()),
+    };
 
-  res.status(200).send(updatedTodo);
-});
+    todoInsertSchema.parse(newTodo);
+
+    const updatedTodo = await db
+      .update(todo)
+      .set(newTodo)
+      .where(eq(todo.id, todoToUpdate.id))
+      .returning();
+
+    res.status(200).send(updatedTodo);
+  }
+);
