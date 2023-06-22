@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec node --loader ts-node/esm src/app.ts",
     "build": "tsc",
-    "db:generate": "drizzle-kit generate:pg",
+    "db:generate": "tsc && drizzle-kit generate:pg",
     "db:drop": "drizzle-kit drop --config=drizzle.config.ts",
     "db:migrate": "ts-node-esm src/db/migrationScript.ts"
   },

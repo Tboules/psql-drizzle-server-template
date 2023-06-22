@@ -71,6 +71,27 @@
       "when": 1687453215753,
       "tag": "0009_nifty_wolf_cub",
       "breakpoints": false
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1687454041113,
+      "tag": "0010_wandering_giant_girl",
+      "breakpoints": false
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1687454091142,
+      "tag": "0011_parallel_bloodaxe",
+      "breakpoints": false
+    },
+    {
+      "idx": 12,
+      "version": "5",
+      "when": 1687454107065,
+      "tag": "0012_huge_firestar",
+      "breakpoints": false
     }
   ]
 }

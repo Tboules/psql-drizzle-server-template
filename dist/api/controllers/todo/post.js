@@ -7,6 +7,7 @@ export const postTodo = tryCatch(async (req, res) => {
         ...data,
         createdAt: new Date(Date.now()),
         status: "created",
+        authorId: req.user?.id,
     };
     todoInsertSchema.parse(newTodo);
     const insertedTodo = await db.insert(todo).values(newTodo).returning();
