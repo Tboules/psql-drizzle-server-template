@@ -57,6 +57,20 @@
       "when": 1687301702356,
       "tag": "0007_light_celestials",
       "breakpoints": false
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1687453119499,
+      "tag": "0008_panoramic_gamma_corps",
+      "breakpoints": false
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1687453215753,
+      "tag": "0009_nifty_wolf_cub",
+      "breakpoints": false
     }
   ]
 }

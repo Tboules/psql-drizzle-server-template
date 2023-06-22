@@ -11,9 +11,9 @@ import { authCheck } from "../middleware/authCheck.js";
 const todoRouter = Router();
 
 todoRouter.get("/", authCheck, getTodos);
-todoRouter.get("/:search", searchTodos);
-todoRouter.post("/", postTodo);
-todoRouter.put("/", putTodo);
-todoRouter.delete("/:id", deleteTodo);
+todoRouter.get("/:search", authCheck, searchTodos);
+todoRouter.post("/", authCheck, postTodo);
+todoRouter.put("/", authCheck, putTodo);
+todoRouter.delete("/:id", authCheck, deleteTodo);
 
 export default todoRouter;

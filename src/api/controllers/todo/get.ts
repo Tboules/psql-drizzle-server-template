@@ -28,3 +28,9 @@ export const searchTodos: RequestHandler<{ search: string }> = tryCatch(
     res.status(200).send(filteredTodos);
   }
 );
+
+// export const getUsersTodos = tryCatch(async (req: RequestWithUser, res) => {
+//   const todos = await db.select().from(todo);
+
+//   res.status(200).send(todos);
+// });

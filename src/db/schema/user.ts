@@ -1,5 +1,5 @@
 import { createInsertSchema } from "drizzle-zod";
-import { InferModel } from "drizzle-orm";
+import { InferModel, relations } from "drizzle-orm";
 import {
   pgTable,
   text,
@@ -8,6 +8,7 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 import { z } from "zod";
+import { todo } from "./todo.js";
 
 export const user = pgTable(
   "user",
@@ -30,3 +31,7 @@ export type User = InferModel<typeof user>;
 export const userInsertSchema = createInsertSchema(user, {
   createdAt: z.date().optional(),
 });
+
+export const userRelations = relations(user, ({ many }) => ({
+  todos: many(todo),
+}));
