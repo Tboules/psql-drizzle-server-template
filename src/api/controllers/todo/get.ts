@@ -1,4 +1,4 @@
-import { ilike, or } from "drizzle-orm";
+import { and, eq, ilike, or } from "drizzle-orm";
 import { RequestHandler } from "express";
 
 import { todo } from "../../../db/schema/todo.js";
@@ -7,30 +7,28 @@ import tryCatch from "../../../utils/tryCatch.js";
 import { RequestWithUser } from "../../../utils/types.js";
 
 export const getTodos = tryCatch(async (req: RequestWithUser, res) => {
-  const todos = await db.select().from(todo);
+  const userId = req.user?.id ?? "";
 
-  console.log(req.user);
+  const todos = await db.select().from(todo).where(eq(todo.authorId, userId));
 
   res.status(200).send(todos);
 });
 
 export const searchTodos: RequestHandler<{ search: string }> = tryCatch(
-  async (req, res) => {
+  async (req: RequestWithUser, res) => {
+    const userId = req.user?.id ?? "";
     const { search } = req.params;
 
     const filteredTodos = await db
       .select()
       .from(todo)
       .where(
-        or(ilike(todo.body, `%${search}%`), ilike(todo.title, `%${search}%`))
+        and(
+          eq(todo.authorId, userId),
+          or(ilike(todo.body, `%${search}%`), ilike(todo.title, `%${search}%`))
+        )
       );
 
     res.status(200).send(filteredTodos);
   }
 );
-
-// export const getUsersTodos = tryCatch(async (req: RequestWithUser, res) => {
-//   const todos = await db.select().from(todo);
-
-//   res.status(200).send(todos);
-// });

@@ -35,7 +35,7 @@ export type Todo = InferModel<typeof todo>;
 export const todoInsertSchema = createInsertSchema(todo, {
   title: z.string().min(1),
   body: z.string().min(1),
-  authorId: z.string(),
+  authorId: z.string().uuid(),
 });
 export const todoSelectSchema = createSelectSchema(todo);
 
